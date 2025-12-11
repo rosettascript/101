@@ -1,82 +1,97 @@
-# RosettaScript Studio
+# RosettaScript
 
-## Project info
+> Developer tools for converting, automating, and building. From Word to HTML converters to database visualization—we've got you covered.
 
-RosettaScript Studio provides powerful developer tools to convert, automate, and build. From Word to HTML converters to database visualization—we've got you covered.
+[![Live Site](https://img.shields.io/badge/Live%20Site-rosettascript.github.io-22c55e?style=flat-square)](https://rosettascript.github.io)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](LICENSE)
 
-## How can I edit this code?
+RosettaScript is a collection of powerful, free online developer tools designed to streamline your workflow. Whether you need to convert Word documents to HTML, format JSON, encode/decode Base64, or manage databases, RosettaScript has the tools you need.
 
-**Use your preferred IDE**
+## ✨ Features
 
-If you want to work locally using your own IDE, you can clone this repo and push changes.
+- **Word to HTML Converter** - Convert Word documents to clean, semantic HTML with multiple output formats
+- **JSON Formatter** - Beautify and validate JSON with syntax highlighting
+- **Base64 Encoder/Decoder** - Encode and decode Base64 strings with UTF-8 support
+- **URL Encoder/Decoder** - Encode and decode URL components
+- **Color Converter** - Convert between HEX, RGB, HSL, and more
+- **UUID Generator** - Generate version 4 UUIDs instantly
+- **Regex Tester** - Test and debug regular expressions in real-time
+- **Hash Generator** - Generate MD5, SHA-1, SHA-256, and SHA-512 hashes
+- **JWT Decoder** - Decode and inspect JWT tokens
+- **Timestamp Converter** - Convert between Unix timestamps and human-readable dates
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## 🚀 Getting Started
 
-Follow these steps:
+### Prerequisites
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Node.js 20+ ([install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating))
+- npm or bun
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+### Installation
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+# Clone the repository
+git clone https://github.com/rosettascript/rosettascript.github.io.git
+cd rosettascript.github.io
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The development server will start at `http://localhost:8000`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-### Deploy to GitHub Pages
-
-This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
-
-**Setup Steps:**
-
-1. **Enable GitHub Pages in your repository:**
-   - Go to your repository on GitHub
-   - Navigate to **Settings** → **Pages**
-   - Under **Source**, select **GitHub Actions**
-   - Save the settings
-
-2. **Push to trigger deployment:**
-   - Push your code to the `main` or `master` branch
-   - The GitHub Actions workflow will automatically build and deploy your site
-   - Your site will be available at: `https://<username>.github.io/<repository-name>/`
-
-3. **For custom domain or root domain:**
-   - If deploying to `username.github.io` (user/organization page), update the `GITHUB_PAGES_BASE` in `.github/workflows/deploy.yml` to `/` instead of `/${{ github.event.repository.name }}/`
-
-**Manual deployment:**
-```sh
-npm run deploy
+```bash
+npm run build
+npm run preview
 ```
 
-The workflow will automatically run on every push to the main branch, or you can trigger it manually from the Actions tab.
+## 🛠️ Tech Stack
+
+- **[Vite](https://vitejs.dev/)** - Next-generation frontend tooling
+- **[React](https://react.dev/)** - UI library
+- **[TypeScript](https://www.typescriptlang.org/)** - Type safety
+- **[shadcn/ui](https://ui.shadcn.com/)** - Beautiful, accessible components
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+- **[React Router](https://reactrouter.com/)** - Client-side routing
+
+## 📦 Project Structure
+
+```
+rosettascript.github.io/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── lib/            # Utility functions and libraries
+│   └── data/           # Static data (blog posts, etc.)
+├── public/             # Static assets
+└── .github/workflows/  # CI/CD configuration
+```
+
+## 🚢 Deployment
+
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions. The site is served at `https://rosettascript.github.io`.
+
+### Manual Deployment
+
+```bash
+npm run build
+```
+
+The build output will be in the `dist/` directory, ready for deployment.
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/rosettascript/rosettascript.github.io/issues).
+
+---
+
+Built with ❤️ by [RosettaScript](https://rosettascript.github.io)
