@@ -8,21 +8,19 @@ interface PageTransitionProps {
 
 export function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation();
-  const [isVisible, setIsVisible] = useState(false);
-  const [displayLocation, setDisplayLocation] = useState(location);
+  const [isVisible, setIsVisible] = useState(true);
+  const [displayKey, setDisplayKey] = useState(location.key);
 
   useEffect(() => {
-    if (location !== displayLocation) {
+    if (location.key !== displayKey) {
       setIsVisible(false);
       const timeout = setTimeout(() => {
-        setDisplayLocation(location);
+        setDisplayKey(location.key);
         setIsVisible(true);
       }, 150);
       return () => clearTimeout(timeout);
-    } else {
-      setIsVisible(true);
     }
-  }, [location, displayLocation]);
+  }, [location.key, displayKey]);
 
   return (
     <div
