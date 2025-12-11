@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint } from "lucide-react";
+import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint, Regex, Hash, KeyRound, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tools = [
@@ -52,6 +52,38 @@ const tools = [
     icon: Fingerprint,
     path: "/tools/uuid-generator",
     color: "text-[hsl(var(--syntax-yellow))]",
+  },
+  {
+    id: "regex-tester",
+    title: "Regex Tester",
+    description: "Test and debug regular expressions with live matching, syntax highlighting, and capture group extraction.",
+    icon: Regex,
+    path: "/tools/regex-tester",
+    color: "text-[hsl(var(--syntax-purple))]",
+  },
+  {
+    id: "hash-generator",
+    title: "Hash Generator",
+    description: "Generate SHA-1, SHA-256, SHA-384, and SHA-512 hash values from text input.",
+    icon: Hash,
+    path: "/tools/hash-generator",
+    color: "text-[hsl(var(--syntax-green))]",
+  },
+  {
+    id: "jwt-decoder",
+    title: "JWT Decoder",
+    description: "Decode and inspect JSON Web Tokens. View header, payload, signature, and expiration times.",
+    icon: KeyRound,
+    path: "/tools/jwt-decoder",
+    color: "text-[hsl(var(--syntax-cyan))]",
+  },
+  {
+    id: "timestamp-converter",
+    title: "Timestamp Converter",
+    description: "Convert between Unix timestamps and human-readable dates. Supports seconds and milliseconds.",
+    icon: Clock,
+    path: "/tools/timestamp-converter",
+    color: "text-[hsl(var(--syntax-orange))]",
   },
 ];
 

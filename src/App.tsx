@@ -12,6 +12,10 @@ import Base64 from "./pages/tools/Base64";
 import UrlEncoder from "./pages/tools/UrlEncoder";
 import ColorConverter from "./pages/tools/ColorConverter";
 import UuidGenerator from "./pages/tools/UuidGenerator";
+import RegexTester from "./pages/tools/RegexTester";
+import HashGenerator from "./pages/tools/HashGenerator";
+import JwtDecoder from "./pages/tools/JwtDecoder";
+import TimestampConverter from "./pages/tools/TimestampConverter";
 import Downloads from "./pages/Downloads";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
@@ -37,6 +41,10 @@ const App = () => (
             <Route path="/tools/url-encoder" element={<UrlEncoder />} />
             <Route path="/tools/color-converter" element={<ColorConverter />} />
             <Route path="/tools/uuid-generator" element={<UuidGenerator />} />
+            <Route path="/tools/regex-tester" element={<RegexTester />} />
+            <Route path="/tools/hash-generator" element={<HashGenerator />} />
+            <Route path="/tools/jwt-decoder" element={<JwtDecoder />} />
+            <Route path="/tools/timestamp-converter" element={<TimestampConverter />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:id" element={<BlogPost />} />
