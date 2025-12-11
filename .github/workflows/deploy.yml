@@ -35,8 +35,7 @@ jobs:
       - name: Build
         env:
           # Set the base path for GitHub Pages
-          # For project pages: use your repository name (e.g., /rosettascript-studio/)
-          # For user/organization pages: leave empty or use /
+          # For user/organization pages (rosettascript.github.io): use /
           GITHUB_PAGES_BASE: /
         run: npm run build
 
