@@ -1,22 +1,14 @@
-# Welcome to your Lovable project
+# RosettaScript Studio
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+RosettaScript Studio provides powerful developer tools to convert, automate, and build. From Word to HTML converters to database visualization—we've got you covered.
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -62,12 +54,29 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Deploy to GitHub Pages
 
-## Can I connect a custom domain to my Lovable project?
+This project is configured for automatic deployment to GitHub Pages using GitHub Actions.
 
-Yes, you can!
+**Setup Steps:**
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+1. **Enable GitHub Pages in your repository:**
+   - Go to your repository on GitHub
+   - Navigate to **Settings** → **Pages**
+   - Under **Source**, select **GitHub Actions**
+   - Save the settings
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+2. **Push to trigger deployment:**
+   - Push your code to the `main` or `master` branch
+   - The GitHub Actions workflow will automatically build and deploy your site
+   - Your site will be available at: `https://<username>.github.io/<repository-name>/`
+
+3. **For custom domain or root domain:**
+   - If deploying to `username.github.io` (user/organization page), update the `GITHUB_PAGES_BASE` in `.github/workflows/deploy.yml` to `/` instead of `/${{ github.event.repository.name }}/`
+
+**Manual deployment:**
+```sh
+npm run deploy
+```
+
+The workflow will automatically run on every push to the main branch, or you can trigger it manually from the Actions tab.

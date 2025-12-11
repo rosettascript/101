@@ -49,13 +49,15 @@ export default function WordToHtml() {
             Word to HTML Converter
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Convert your text content to clean HTML code. Choose from regular, blog, or shoppable 
-            output formats based on your needs.
+            Convert Word document content to clean, semantic HTML. Simply paste from Word and get 
+            properly formatted HTML with advanced features for blogs and shoppables modes.
           </p>
         </div>
+      </div>
 
-        {/* Converter Tool */}
-        <div className="terminal-bg p-6 lg:p-8">
+      {/* Converter Tool - Full Width */}
+      <div className="w-full px-4 lg:px-8 xl:px-12 mb-12">
+        <div className="terminal-bg p-6 lg:p-8 max-w-[1920px] mx-auto">
           <div className="flex items-center gap-2 pb-4 mb-6 border-b border-border">
             <div className="w-3 h-3 rounded-full bg-destructive/80" />
             <div className="w-3 h-3 rounded-full bg-[hsl(var(--syntax-yellow))]/80" />
@@ -67,9 +69,11 @@ export default function WordToHtml() {
           </div>
           <WordToHtmlConverter />
         </div>
+      </div>
 
-        {/* Format Info */}
-        <div className="grid md:grid-cols-3 gap-6 mt-12">
+      {/* Format Info */}
+      <div className="container mx-auto px-4">
+        <div className="grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-card/50 rounded-lg border border-border">
             <h3 className="font-semibold mb-2 text-primary">Regular Output</h3>
             <p className="text-sm text-muted-foreground">
@@ -78,17 +82,17 @@ export default function WordToHtml() {
             </p>
           </div>
           <div className="p-6 bg-card/50 rounded-lg border border-border">
-            <h3 className="font-semibold mb-2 text-secondary">Blog Output</h3>
+            <h3 className="font-semibold mb-2 text-secondary">Blogs Output</h3>
             <p className="text-sm text-muted-foreground">
-              Article-wrapped HTML with metadata support. Optimized for CMS platforms 
-              and blog publishing systems.
+              Advanced blog formatting with heading strong tags, key takeaways processing, 
+              link attributes, spacing rules, and more. Customize features to match your needs.
             </p>
           </div>
           <div className="p-6 bg-card/50 rounded-lg border border-border">
-            <h3 className="font-semibold mb-2 text-accent">Shoppable Output</h3>
+            <h3 className="font-semibold mb-2 text-accent">Shoppables Output</h3>
             <p className="text-sm text-muted-foreground">
-              E-commerce ready HTML with Schema.org markup. Includes product structure 
-              and add-to-cart placeholders.
+              E-commerce optimized HTML with heading formatting, link attributes, 
+              and source normalization. Perfect for product content conversion.
             </p>
           </div>
         </div>

@@ -84,8 +84,8 @@ export default function Index() {
       
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-        <div className="container mx-auto px-4 py-12 lg:py-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+        <div className="container mx-auto px-4 py-12 lg:py-20 relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-mono">
