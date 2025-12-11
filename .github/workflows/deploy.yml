@@ -37,7 +37,7 @@ jobs:
           # Set the base path for GitHub Pages
           # For project pages: use your repository name (e.g., /rosettascript-studio/)
           # For user/organization pages: leave empty or use /
-          GITHUB_PAGES_BASE: /${{ github.event.repository.name }}/
+          GITHUB_PAGES_BASE: /
         run: npm run build
 
       - name: Setup Pages
