@@ -72,7 +72,7 @@ export default function WordToHtml() {
       </div>
 
       {/* Format Info */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mb-12">
         <div className="grid md:grid-cols-3 gap-6">
           <div className="p-6 bg-card/50 rounded-lg border border-border">
             <h3 className="font-semibold mb-2 text-primary">Regular Output</h3>
