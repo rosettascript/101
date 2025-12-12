@@ -2,8 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import { useEffect } from "react";
 import Index from "./pages/Index";
 import Tools from "./pages/Tools";
 import WordToHtml from "./pages/tools/WordToHtml";
@@ -25,6 +26,29 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Component to handle GitHub Pages 404.html redirect pattern
+const RedirectHandler = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Handle GitHub Pages SPA redirect pattern from 404.html
+    // The 404.html redirects to /?/path, we need to extract and navigate to /path
+    if (location.search) {
+      const search = location.search.slice(1); // Remove the '?'
+      if (search.startsWith('/')) {
+        // Extract the path from the query string
+        const path = search.split('&')[0].replace(/~and~/g, '&');
+        // Remove the query parameter and navigate to the actual path
+        window.history.replaceState(null, '', path + location.hash);
+        navigate(path, { replace: true });
+      }
+    }
+  }, [location, navigate]);
+
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
@@ -32,6 +56,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter basename={import.meta.env.BASE_URL}>
+          <RedirectHandler />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/tools" element={<Tools />} />
