@@ -3,16 +3,80 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "@/components/ui/copy-button";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 interface MarkdownRendererProps {
   content: string;
   className?: string;
 }
 
+// Extract YouTube video ID from various YouTube URL formats
+function getYouTubeVideoId(url: string): string | null {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/,
+    /youtube\.com\/.*[?&]v=([^&\n?#]+)/,
+  ];
+  
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match && match[1]) {
+      return match[1];
+    }
+  }
+  
+  return null;
+}
+
+// Process content to convert YouTube URLs to embed HTML
+function processYouTubeEmbeds(content: string): string {
+  // Match YouTube URLs on their own line
+  const youtubeRegex = /(?:^|\n)(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)[^\s\n]+)(?:\n|$)/g;
+  
+  return content.replace(youtubeRegex, (match, url) => {
+    const videoId = getYouTubeVideoId(url);
+    if (videoId) {
+      return `\n<div class="youtube-embed-wrapper">
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/${videoId}"
+  title="YouTube video player"
+  frameBorder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowFullScreen
+></iframe>
+</div>\n`;
+    }
+    return match;
+  });
+}
+
 export function MarkdownRenderer({ content, className }: MarkdownRendererProps) {
+  const processedContent = processYouTubeEmbeds(content);
+  
   return (
     <div className={cn("prose prose-invert max-w-none", className)}>
+      <style>{`
+        .youtube-embed-wrapper {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 aspect ratio */
+          height: 0;
+          overflow: hidden;
+          margin: 2rem 0;
+          border-radius: 0.5rem;
+        }
+        .youtube-embed-wrapper iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      `}</style>
       <ReactMarkdown
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]}
         components={{
           h1: ({ children }) => (
             <h1 className="text-3xl font-bold mt-8 mb-4 text-foreground">
@@ -101,9 +165,16 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
             );
           },
           hr: () => <hr className="border-border my-8" />,
+          img: ({ src, alt }) => (
+            <img
+              src={src}
+              alt={alt}
+              className="rounded-lg max-w-full h-auto my-4"
+            />
+          ),
         }}
       >
-        {content}
+        {processedContent}
       </ReactMarkdown>
     </div>
   );
