@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RosettaScript - Developer Tools Made Simple</title>
     <script>
-      // GitHub Pages SPA redirect
+      // GitHub Pages SPA redirect - optimized for bots and browsers
       // This script redirects 404s to index.html for client-side routing
       // Static files (xml, txt, etc.) are served directly by GitHub Pages
       (function() {
@@ -23,7 +23,7 @@
           return; // Let GitHub Pages serve the file directly
         }
         
-        // Build the redirect URL
+        // Build the redirect URL using the standard GitHub Pages SPA pattern
         var basePath = pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
         if (basePath === '') basePath = '/';
         if (!basePath.endsWith('/')) basePath += '/';
@@ -33,13 +33,24 @@
           (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
           l.hash;
         
-        l.replace(
-          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + redirectPath
-        );
+        // Add meta refresh tag for bots that might be slow to execute JavaScript
+        try {
+          var meta = document.createElement('meta');
+          meta.httpEquiv = 'refresh';
+          meta.content = '0;url=' + redirectPath;
+          var head = document.head || document.getElementsByTagName('head')[0];
+          if (head) head.appendChild(meta);
+        } catch(e) {}
+        
+        // Immediate JavaScript redirect - fastest for modern browsers and bots
+        // Use replace instead of assign to avoid adding to history
+        l.replace(redirectPath);
       })();
     </script>
+    <!-- Meta refresh fallback for bots that don't execute JavaScript -->
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/">
+    </noscript>
   </head>
   <body></body>
 </html>
-
-
