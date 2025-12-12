@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Terminal, Github, Twitter, Mail } from "lucide-react";
+import { Terminal, Github, Mail } from "lucide-react";
+import { XIcon } from "@/components/icons/XIcon";
 
 export function Footer() {
   return (
@@ -65,13 +66,13 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-foreground">Connect</h4>
             <div className="flex gap-3">
-              <a href="#" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+              <a href="https://github.com/rosettascript" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
                 <Github className="h-5 w-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
-                <Twitter className="h-5 w-5" />
+              <a href="https://x.com/rosettascript" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+                <XIcon size={20} className="h-5 w-5" />
               </a>
-              <a href="#" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
+              <a href="mailto:rosettascript@gmail.com" className="p-2 rounded-lg bg-muted/50 hover:bg-muted transition-colors text-muted-foreground hover:text-foreground">
                 <Mail className="h-5 w-5" />
               </a>
             </div>

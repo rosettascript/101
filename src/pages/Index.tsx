@@ -19,7 +19,7 @@ const features = [
   {
     icon: Code2,
     title: "Online Tools",
-    description: "Convert Word to HTML with multiple output formats",
+    description: "20+ free developer tools: formatters, converters, encoders, generators, and more",
     link: "/tools",
     color: "text-primary",
   },
@@ -66,10 +66,11 @@ const highlights = [
 
 const codeSnippet = `// Welcome to RosettaScript
 const tools = {
-  convert: "Word → HTML",
-  automate: "Windows Scripts",
-  build: "PERN Projects",
-  visualize: "PSQL Manager"
+  formatters: ["JSON", "Code", "Text"],
+  converters: ["Word → HTML", "Base64", "URL", "Color"],
+  generators: ["UUID", "Hash", "QR Code", "Timestamp"],
+  utilities: ["Regex Tester", "Image Tool", "Web Scraper"],
+  downloads: ["Windows Scripts", "PERN Setup", "PSQL Manager"]
 };
 
 export default tools;`;
@@ -97,8 +98,8 @@ export default function Index() {
                 <span className="text-gradient">Build Faster</span>
               </h1>
               <p className="text-lg text-muted-foreground max-w-lg">
-                RosettaScript provides powerful tools to convert, automate, and build. 
-                From Word to HTML converters to database visualization—we've got you covered.
+                RosettaScript provides a comprehensive suite of developer tools. 
+                From code formatters and converters to hash generators, image tools, and downloadable utilities—everything you need to boost your productivity.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild size="lg" className="glow-primary">
@@ -153,7 +154,7 @@ export default function Index() {
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold mb-3">Everything You Need</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              From online converters to downloadable tools, find everything to boost your productivity
+              Explore our collection of online tools, downloadable utilities, educational resources, and developer guides
             </p>
           </div>
 
@@ -203,14 +204,22 @@ export default function Index() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-3">Ready to Get Started?</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Try our online tools instantly or download our utilities for your local machine.
+            Explore our 20+ online tools, download utilities, read our blog, or check out school project templates.
           </p>
-          <Button asChild size="lg">
-            <Link to="/tools">
-              Start Converting Now
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button asChild size="lg">
+              <Link to="/tools">
+                Browse All Tools
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg">
+              <Link to="/blogs">
+                Read Blog
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
     </Layout>

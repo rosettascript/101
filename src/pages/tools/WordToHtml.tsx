@@ -2,6 +2,7 @@ import { Layout } from "@/components/layout/Layout";
 import { WordToHtmlConverter } from "@/components/tools/WordToHtmlConverter";
 import { Code2, FileText, Home } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,6 +13,14 @@ import {
 } from "@/components/ui/breadcrumb";
 
 export default function WordToHtml() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Focus the container on mount, which will help establish focus context
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.focus();
+    }
+  }, []);
   return (
     <Layout>
       <div className="container mx-auto px-4 py-12">
@@ -56,8 +65,12 @@ export default function WordToHtml() {
       </div>
 
       {/* Converter Tool - Full Width */}
-      <div className="w-full mb-12 px-4 lg:px-8 xl:px-12">
-        <div className="terminal-bg p-4 md:p-6 lg:p-8 max-w-[1920px] w-full max-w-full mx-auto">
+      <div className="w-full mb-12 px-4 lg:px-8 xl:px-12 -mt-[30px]">
+        <div 
+          ref={containerRef}
+          tabIndex={-1}
+          className="terminal-bg p-4 md:p-6 lg:p-8 max-w-[1920px] w-full max-w-full mx-auto outline-none"
+        >
           <div className="flex items-center gap-2 pb-4 mb-6 border-b border-border">
             <div className="w-3 h-3 rounded-full bg-destructive/80" />
             <div className="w-3 h-3 rounded-full bg-[hsl(var(--syntax-yellow))]/80" />

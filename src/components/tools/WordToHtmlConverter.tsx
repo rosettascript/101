@@ -153,6 +153,48 @@ export function WordToHtmlConverter() {
 
   const inputAreaRef = useRef<HTMLDivElement>(null);
 
+  // Auto-focus the input area when component mounts
+  // The container is focused first to establish focus context, then the input gets focus
+  useEffect(() => {
+    let focusTimeout: ReturnType<typeof setTimeout>;
+    let restoreTimeout: ReturnType<typeof setTimeout>;
+    let hasUserInteracted = false;
+    
+    // Track user interaction to avoid re-focusing after user clicks away
+    const handleUserInteraction = () => {
+      hasUserInteracted = true;
+    };
+    document.addEventListener('mousedown', handleUserInteraction, { once: true, capture: true });
+    document.addEventListener('keydown', handleUserInteraction, { once: true, capture: true });
+    
+    // Focus the input after container has been focused (container focus happens in parent component)
+    const focusInput = () => {
+      if (inputAreaRef.current && !hasUserInteracted) {
+        inputAreaRef.current.focus();
+        
+        // Re-focus if lost within 300ms (unless user interacted)
+        restoreTimeout = setTimeout(() => {
+          if (inputAreaRef.current && document.activeElement !== inputAreaRef.current && !hasUserInteracted) {
+            inputAreaRef.current.focus();
+          }
+        }, 300);
+      }
+    };
+    
+    // Wait for container to be focused first, then focus input
+    // Container focus happens in parent component, so we wait a bit longer
+    requestAnimationFrame(() => {
+      setTimeout(focusInput, 250);
+    });
+    
+    return () => {
+      clearTimeout(focusTimeout);
+      clearTimeout(restoreTimeout);
+      document.removeEventListener('mousedown', handleUserInteraction, { capture: true });
+      document.removeEventListener('keydown', handleUserInteraction, { capture: true });
+    };
+  }, []);
+
   // Handle paste events - allow natural paste, then process
   useEffect(() => {
     const inputArea = inputAreaRef.current;
@@ -505,6 +547,7 @@ export function WordToHtmlConverter() {
           <div
             ref={inputAreaRef}
             contentEditable
+            tabIndex={0}
             data-placeholder="Paste your Word document content here..."
             className="flex-1 min-h-[200px] max-h-[50vh] lg:max-h-[550px] p-4 text-sm bg-background/80 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 input-editable"
             style={{

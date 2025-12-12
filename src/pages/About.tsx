@@ -3,7 +3,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Terminal, Target, Heart, Zap, Mail, Github, Twitter } from "lucide-react";
+import { Terminal, Target, Heart, Zap, Mail, Github } from "lucide-react";
+import { XIcon } from "@/components/icons/XIcon";
 import { toast } from "@/hooks/use-toast";
 
 const values = [
@@ -119,16 +120,16 @@ export default function About() {
               Have questions, suggestions, or just want to say hi? We'd love to hear from you.
             </p>
             <div className="space-y-4">
-              <a href="mailto:hello@rosettascript.dev" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:rosettascript@gmail.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="h-5 w-5" />
-                hello@rosettascript.dev
+                rosettascript@gmail.com
               </a>
               <a href="https://github.com/rosettascript" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
                 github.com/rosettascript
               </a>
-              <a href="#" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                <Twitter className="h-5 w-5" />
+              <a href="https://x.com/rosettascript" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                <XIcon size={20} className="h-5 w-5" />
                 @rosettascript
               </a>
             </div>

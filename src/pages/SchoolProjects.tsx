@@ -1,122 +1,72 @@
-import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Download, Code2, Database, Terminal, Globe } from "lucide-react";
-import { toast } from "@/hooks/use-toast";
+import { GraduationCap, Download, Cpu, Waves, Clipboard } from "lucide-react";
 
 const projects = [
   {
-    id: "portfolio-website",
-    title: "Personal Portfolio Website",
-    description: "A responsive portfolio template perfect for showcasing your projects. Includes sections for about, skills, projects, and contact.",
-    category: "Web Development",
-    difficulty: "Beginner",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    icon: Globe,
+    id: "logic-gates-calculator",
+    title: "Logic Gates Calculator - Proteus",
+    description: "4-bit calculator implementation using logic gates in Proteus. Available in two versions: with memory and without memory.",
+    category: "Electronics",
+    difficulty: "Intermediate",
+    technologies: ["Proteus", "Logic Gates", "Digital Circuits"],
+    icon: Cpu,
     color: "text-primary",
+    downloads: [
+      {
+        name: "With Memory",
+        file: "/downloads/4-Bit Calculator-w-memory.pdsprj",
+      },
+      {
+        name: "Without Memory",
+        file: "/downloads/4-Bit Calculator-without-memory.pdsprj",
+      },
+    ],
   },
   {
-    id: "todo-app",
-    title: "Todo List Application",
-    description: "A feature-rich todo app with local storage persistence. Learn CRUD operations and state management.",
-    category: "Web Development",
-    difficulty: "Beginner",
-    technologies: ["React", "TypeScript", "Tailwind CSS"],
-    icon: Code2,
+    id: "audio-bandpass-filter",
+    title: "Audio Bandpass Filter - Matlab",
+    description: "Matlab implementation of an audio bandpass filter for signal processing applications.",
+    category: "Signal Processing",
+    difficulty: "Intermediate",
+    technologies: ["Matlab", "Signal Processing", "Audio Filtering"],
+    icon: Waves,
     color: "text-secondary",
+    downloads: [
+      {
+        name: "Matlab Script",
+        file: "/downloads/audio_bandpass_filter.m",
+      },
+    ],
   },
   {
-    id: "student-database",
-    title: "Student Database Management",
-    description: "A PostgreSQL-based student records system. Learn database design, queries, and CRUD operations.",
-    category: "Database",
-    difficulty: "Intermediate",
-    technologies: ["PostgreSQL", "Node.js", "Express"],
-    icon: Database,
-    color: "text-accent",
-  },
-  {
-    id: "weather-dashboard",
-    title: "Weather Dashboard",
-    description: "An interactive weather app using external APIs. Practice API integration and data visualization.",
-    category: "Web Development",
-    difficulty: "Intermediate",
-    technologies: ["React", "API Integration", "Charts"],
-    icon: Globe,
-    color: "text-[hsl(var(--syntax-cyan))]",
-  },
-  {
-    id: "file-organizer",
-    title: "File Organizer Script",
-    description: "A Python script to automatically organize files by type. Learn file handling and automation.",
-    category: "Scripting",
+    id: "copy-paste-listener",
+    title: "Copy Paste Listener - Python",
+    description: "Windows utility tool built with Python that monitors clipboard activity. Useful for tracking copy-paste operations.",
+    category: "Utility",
     difficulty: "Beginner",
-    technologies: ["Python", "OS Module", "File Handling"],
-    icon: Terminal,
-    color: "text-[hsl(var(--syntax-orange))]",
-  },
-  {
-    id: "blog-cms",
-    title: "Simple Blog CMS",
-    description: "A basic content management system for blogs. Full PERN stack implementation with authentication.",
-    category: "Web Development",
-    difficulty: "Advanced",
-    technologies: ["PostgreSQL", "Express", "React", "Node.js"],
-    icon: Code2,
-    color: "text-primary",
-  },
-  {
-    id: "inventory-system",
-    title: "Inventory Management System",
-    description: "Track products, manage stock levels, and generate reports. Database-focused project.",
-    category: "Database",
-    difficulty: "Intermediate",
-    technologies: ["PostgreSQL", "Python", "Tkinter"],
-    icon: Database,
-    color: "text-secondary",
-  },
-  {
-    id: "backup-script",
-    title: "Automated Backup Script",
-    description: "Windows batch scripts for automated file backups. Learn scheduling and file operations.",
-    category: "Scripting",
-    difficulty: "Beginner",
-    technologies: ["Batch", "PowerShell", "Task Scheduler"],
-    icon: Terminal,
-    color: "text-[hsl(var(--syntax-yellow))]",
-  },
-  {
-    id: "ecommerce-store",
-    title: "E-commerce Store Template",
-    description: "A complete online store template with product listings, cart, and checkout flow.",
-    category: "Web Development",
-    difficulty: "Advanced",
-    technologies: ["React", "Node.js", "Stripe", "PostgreSQL"],
-    icon: Globe,
+    technologies: ["Python", "Windows", "Clipboard"],
+    icon: Clipboard,
     color: "text-accent",
+    downloads: [
+      {
+        name: "Windows Executable",
+        file: "/downloads/copy-paste-listener.exe",
+      },
+    ],
   },
 ];
 
-const categories = ["All", "Web Development", "Database", "Scripting"];
-const difficulties = ["All", "Beginner", "Intermediate", "Advanced"];
-
 export default function SchoolProjects() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedDifficulty, setSelectedDifficulty] = useState("All");
-
-  const filteredProjects = projects.filter((project) => {
-    const matchesCategory = selectedCategory === "All" || project.category === selectedCategory;
-    const matchesDifficulty = selectedDifficulty === "All" || project.difficulty === selectedDifficulty;
-    return matchesCategory && matchesDifficulty;
-  });
-
-  const handleDownload = (projectTitle: string) => {
-    toast({
-      title: "Download Started",
-      description: `${projectTitle} template is being downloaded...`,
-    });
+  const handleDownload = (file: string, fileName: string) => {
+    const link = document.createElement("a");
+    link.href = file;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -137,51 +87,11 @@ export default function SchoolProjects() {
           </p>
         </div>
 
-        {/* Filters */}
-        <div className="flex flex-wrap gap-4 justify-center mb-12">
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Category:</span>
-            <div className="flex gap-1">
-              {categories.map((cat) => (
-                <Badge
-                  key={cat}
-                  variant={selectedCategory === cat ? "default" : "secondary"}
-                  className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat}
-                </Badge>
-              ))}
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Difficulty:</span>
-            <div className="flex gap-1">
-              {difficulties.map((diff) => (
-                <Badge
-                  key={diff}
-                  variant={selectedDifficulty === diff ? "default" : "secondary"}
-                  className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                  onClick={() => setSelectedDifficulty(diff)}
-                >
-                  {diff}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Results Count */}
-        <div className="text-center mb-6">
-          <p className="text-sm text-muted-foreground">
-            Showing {filteredProjects.length} of {projects.length} projects
-          </p>
-        </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <Card key={project.id} className="bg-card/50 border-border hover:border-primary/30 transition-all flex flex-col animate-fade-in">
+          {projects.map((project) => (
+            <Card key={project.id} className="bg-card/50 border-border hover:border-primary/30 transition-all flex flex-col">
               <CardHeader>
                 <div className="flex items-start justify-between mb-2">
                   <div className={`p-2 rounded-lg bg-muted/50 ${project.color}`}>
@@ -221,34 +131,23 @@ export default function SchoolProjects() {
                     ))}
                   </div>
                 </div>
-                <Button
-                  variant="outline"
-                  className="w-full mt-4"
-                  onClick={() => handleDownload(project.title)}
-                >
-                  <Download className="mr-2 h-4 w-4" />
-                  Download Template
-                </Button>
+                <div className="space-y-2 mt-4">
+                  {project.downloads.map((download, index) => (
+                    <Button
+                      key={index}
+                      variant="outline"
+                      className="w-full"
+                      onClick={() => handleDownload(download.file, download.name)}
+                    >
+                      <Download className="mr-2 h-4 w-4" />
+                      Download {download.name}
+                    </Button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           ))}
         </div>
-
-        {/* No Results Message */}
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No projects match your filters.</p>
-            <Button
-              variant="link"
-              onClick={() => {
-                setSelectedCategory("All");
-                setSelectedDifficulty("All");
-              }}
-            >
-              Clear filters
-            </Button>
-          </div>
-        )}
 
         {/* Info Section */}
         <div className="mt-16 terminal-bg p-8">
