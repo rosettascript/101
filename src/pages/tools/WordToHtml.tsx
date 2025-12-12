@@ -56,8 +56,8 @@ export default function WordToHtml() {
       </div>
 
       {/* Converter Tool - Full Width */}
-      <div className="w-full px-4 lg:px-8 xl:px-12 mb-12">
-        <div className="terminal-bg p-6 lg:p-8 max-w-[1920px] mx-auto">
+      <div className="w-full mb-12 px-4 lg:px-8 xl:px-12">
+        <div className="terminal-bg p-4 md:p-6 lg:p-8 max-w-[1920px] w-full max-w-full mx-auto">
           <div className="flex items-center gap-2 pb-4 mb-6 border-b border-border">
             <div className="w-3 h-3 rounded-full bg-destructive/80" />
             <div className="w-3 h-3 rounded-full bg-[hsl(var(--syntax-yellow))]/80" />

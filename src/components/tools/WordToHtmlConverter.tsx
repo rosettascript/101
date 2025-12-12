@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Copy, Check, FileText, Code, ShoppingBag, Newspaper, ChevronDown, ChevronUp, X, Eye, CheckCircle2, AlertCircle } from "lucide-react";
+import { Copy, Check, FileText, Code, ShoppingBag, Newspaper, ChevronDown, ChevronUp, X, Eye, CheckCircle2, AlertCircle, Maximize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { toast } from "@/hooks/use-toast";
 import { convertWordToHtml, getUnformattedHtml, convertToHtml, type OutputMode, type FeatureFlags } from "@/lib/word-to-html/converter";
 import { cleanWordHtml } from "@/lib/word-to-html/word-html-cleaner";
@@ -135,6 +136,8 @@ export function WordToHtmlConverter() {
   const [showShoppablesFeatures, setShowShoppablesFeatures] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
   const [showValidationDetails, setShowValidationDetails] = useState(false);
+  const [showMaximizedOutput, setShowMaximizedOutput] = useState(false);
+  const [maximizedPreviewMode, setMaximizedPreviewMode] = useState(false);
   
   // Feature flags
   const [features, setFeatures] = useState<FeatureFlags>({
@@ -228,9 +231,9 @@ export function WordToHtmlConverter() {
   }, [previewHtml, outputFormat, features]);
 
   return (
-    <div className="flex flex-col lg:h-[calc(100vh-200px)] lg:min-h-[600px] gap-3 md:gap-4">
+    <div className="flex flex-col gap-3 md:gap-4 w-full max-w-full">
       {/* Main grid: Sidebar | Input | Output */}
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-3 md:gap-4 flex-1 min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-3 md:gap-4 w-full max-w-full min-w-0">
         {/* Sidebar Container: Toolbar + Validation */}
         <div className="flex flex-col gap-3 md:gap-4 min-w-0 lg:min-w-[200px] lg:max-w-[280px] lg:w-auto lg:h-full lg:overflow-y-auto">
           {/* Mode Selection Toolbar */}
@@ -479,7 +482,7 @@ export function WordToHtmlConverter() {
         </div>
 
         {/* Input Section */}
-        <div className="flex flex-col min-h-0 flex-1 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
+        <div className="flex flex-col bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm min-w-0 max-w-full lg:h-[600px]">
           <div className="flex items-center justify-between mb-3 flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded bg-muted">
@@ -503,7 +506,7 @@ export function WordToHtmlConverter() {
             ref={inputAreaRef}
             contentEditable
             data-placeholder="Paste your Word document content here..."
-            className="flex-1 min-h-[200px] max-h-[50vh] lg:min-h-0 lg:max-h-none p-4 text-sm bg-background/80 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 input-editable"
+            className="flex-1 min-h-[200px] max-h-[50vh] lg:max-h-[550px] p-4 text-sm bg-background/80 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 input-editable"
             style={{
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
@@ -542,7 +545,7 @@ export function WordToHtmlConverter() {
         </div>
 
         {/* Output Section */}
-        <div className="flex flex-col min-h-0 flex-1 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
+        <div className="flex flex-col bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm min-w-0 max-w-full lg:h-[600px]">
           <div className="flex items-center justify-between mb-3 flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded bg-primary/10">
@@ -577,6 +580,20 @@ export function WordToHtmlConverter() {
                   <Eye className="h-3.5 w-3.5" />
                 </Button>
               </div>
+              {/* Maximize Button */}
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setMaximizedPreviewMode(showPreview);
+                  setShowMaximizedOutput(true);
+                }}
+                disabled={!outputHtml}
+                className="h-8 w-8 p-0"
+                title="Maximize Output"
+              >
+                <Maximize2 className="h-4 w-4" />
+              </Button>
               {/* Copy Button */}
               <Button
                 variant="outline"
@@ -605,7 +622,7 @@ export function WordToHtmlConverter() {
             </div>
           </div>
           {/* Output Container - matches original structure */}
-          <div className="relative flex-1 min-h-[200px] max-h-[50vh] lg:min-h-0 lg:max-h-none w-full overflow-hidden">
+          <div className="relative flex-1 min-h-[200px] max-h-[50vh] lg:max-h-[550px] w-full overflow-hidden">
             <div className="absolute inset-0 h-full w-full">
               {/* Preview Area - matches .output-area from original */}
               <div 
@@ -858,6 +875,135 @@ export function WordToHtmlConverter() {
           </div>
         </div>
       </div>
+
+      {/* Maximized Output Modal */}
+      <Dialog open={showMaximizedOutput} onOpenChange={setShowMaximizedOutput}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] w-full h-full flex flex-col p-0">
+          <DialogHeader className="px-6 pt-6 pb-4 pr-14 border-b border-border flex-shrink-0">
+            <div className="flex items-center justify-between">
+              <DialogTitle className="flex items-center gap-2">
+                <Code className="h-5 w-5 text-primary" />
+                Output - {maximizedPreviewMode ? 'Preview' : 'Code'}
+              </DialogTitle>
+              <div className="flex items-center gap-2">
+                {/* View Toggle in Modal */}
+                <div className="flex items-center bg-muted/50 rounded-md p-0.5">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setMaximizedPreviewMode(false)}
+                    className={`h-7 w-7 p-0 rounded ${
+                      !maximizedPreviewMode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted/30'
+                    }`}
+                    title="Code"
+                  >
+                    <Code className="h-3.5 w-3.5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setMaximizedPreviewMode(true)}
+                    className={`h-7 w-7 p-0 rounded ${
+                      maximizedPreviewMode ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-muted/30'
+                    }`}
+                    title="Preview"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+                {/* Copy Button in Modal */}
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={async () => {
+                    if (outputHtml) {
+                      await navigator.clipboard.writeText(outputHtml);
+                      setCopied(true);
+                      toast({
+                        title: "Copied!",
+                        description: "HTML copied to clipboard",
+                      });
+                      setTimeout(() => setCopied(false), 2000);
+                    }
+                  }}
+                  disabled={!outputHtml}
+                  className="h-8 w-8 p-0"
+                  title="Copy HTML"
+                >
+                  {copied ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </DialogHeader>
+          <div className="flex-1 overflow-hidden p-6">
+            {maximizedPreviewMode ? (
+              /* Preview in Modal */
+              <div 
+                className="h-full w-full p-6 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden bg-background/80 output-preview"
+                style={{
+                  fontSize: '1rem',
+                  lineHeight: '1.75',
+                  fontFamily: 'var(--font-sans)',
+                }}
+                dangerouslySetInnerHTML={{ 
+                  __html: previewHtml || '<p style="color: hsl(var(--muted-foreground));">// Preview will appear here...</p>' 
+                }}
+              />
+            ) : (
+              /* Code in Modal */
+              <div className="h-full w-full overflow-hidden">
+                <style>{`
+                  .syntax-highlighter-modal-wrapper pre[class*="language-"] {
+                    margin: 0 !important;
+                    padding: 1.5rem !important;
+                    background: hsl(var(--background) / 0.8) !important;
+                    height: 100% !important;
+                    overflow: auto !important;
+                    font-family: var(--font-mono) !important;
+                    font-size: 0.875rem !important;
+                    line-height: 1.75 !important;
+                  }
+                  .syntax-highlighter-modal-wrapper code[class*="language-"] {
+                    font-family: var(--font-mono) !important;
+                    font-size: 0.875rem !important;
+                    line-height: 1.75 !important;
+                    color: hsl(var(--foreground)) !important;
+                  }
+                `}</style>
+                <div className="syntax-highlighter-modal-wrapper h-full border border-border/50 rounded-lg overflow-hidden">
+                  <SyntaxHighlighter
+                    language="html"
+                    style={theme === 'dark' ? oneDark : oneLight}
+                    customStyle={{
+                      margin: 0,
+                      padding: '1.5rem',
+                      background: 'hsl(var(--background) / 0.8)',
+                      height: '100%',
+                      overflow: 'auto',
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: '0.875rem',
+                      lineHeight: '1.75',
+                    }}
+                    codeTagProps={{
+                      style: {
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.875rem',
+                        lineHeight: '1.75',
+                      },
+                    }}
+                  >
+                    {outputHtml || "// Output will appear here..."}
+                  </SyntaxHighlighter>
+                </div>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
