@@ -228,14 +228,14 @@ export function WordToHtmlConverter() {
   }, [previewHtml, outputFormat, features]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-200px)] min-h-[600px] gap-3 md:gap-4 lg:gap-4">
+    <div className="flex flex-col lg:h-[calc(100vh-200px)] lg:min-h-[600px] gap-3 md:gap-4">
       {/* Main grid: Sidebar | Input | Output */}
-      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-3 md:gap-4 lg:gap-4 flex-1 min-h-0">
+      <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr_1fr] gap-3 md:gap-4 flex-1 min-h-0">
         {/* Sidebar Container: Toolbar + Validation */}
         <div className="flex flex-col gap-3 md:gap-4 min-w-0 lg:min-w-[200px] lg:max-w-[280px] lg:w-auto lg:h-full lg:overflow-y-auto">
           {/* Mode Selection Toolbar */}
           <div className="bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
-            <div className="space-y-4">
+            <div className="space-y-3 md:space-y-4">
               <div>
                 <label className="text-sm font-medium text-foreground mb-2 block">Output Format:</label>
                 <div className="space-y-2">
@@ -479,7 +479,7 @@ export function WordToHtmlConverter() {
         </div>
 
         {/* Input Section */}
-        <div className="flex flex-col min-h-0 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
+        <div className="flex flex-col min-h-0 flex-1 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
           <div className="flex items-center justify-between mb-3 flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded bg-muted">
@@ -503,7 +503,7 @@ export function WordToHtmlConverter() {
             ref={inputAreaRef}
             contentEditable
             data-placeholder="Paste your Word document content here..."
-            className="flex-1 min-h-0 p-4 text-sm bg-background/80 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 input-editable"
+            className="flex-1 min-h-[200px] max-h-[50vh] lg:min-h-0 lg:max-h-none p-4 text-sm bg-background/80 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden resize-none focus:outline-none focus:ring-2 focus:ring-primary/20 input-editable"
             style={{
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
@@ -542,7 +542,7 @@ export function WordToHtmlConverter() {
         </div>
 
         {/* Output Section */}
-        <div className="flex flex-col min-h-0 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
+        <div className="flex flex-col min-h-0 flex-1 bg-card/50 border border-border/50 rounded-xl p-3 md:p-4 backdrop-blur-sm">
           <div className="flex items-center justify-between mb-3 flex-shrink-0">
             <div className="flex items-center gap-2">
               <div className="p-1.5 rounded bg-primary/10">
@@ -605,8 +605,8 @@ export function WordToHtmlConverter() {
             </div>
           </div>
           {/* Output Container - matches original structure */}
-          <div className="relative flex-1 min-h-0">
-            <div className="absolute inset-0">
+          <div className="relative flex-1 min-h-[200px] max-h-[50vh] lg:min-h-0 lg:max-h-none w-full overflow-hidden">
+            <div className="absolute inset-0 h-full w-full">
               {/* Preview Area - matches .output-area from original */}
               <div 
                 className={`absolute inset-0 p-4 border border-border/50 rounded-lg overflow-y-auto overflow-x-hidden bg-background/80 output-preview ${
