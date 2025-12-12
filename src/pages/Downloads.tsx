@@ -136,7 +136,7 @@ const tools: Tool[] = [
     downloads: [
       {
         platform: "linux",
-        url: "https://github.com/rosettascript/rosettascript.github.io/releases/download/v1.0.0/DBManager-1.0.0.AppImage",
+        url: "https://github.com/rosettascript/db-manager/releases/download/v1.0.0/DBManager-1.0.0.AppImage",
         filename: "DBManager-1.0.0.AppImage",
         size: "137 MB",
       },
