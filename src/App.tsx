@@ -34,13 +34,24 @@ const RedirectHandler = () => {
   useEffect(() => {
     // Handle GitHub Pages SPA redirect pattern from 404.html
     // The 404.html redirects to /?/path, we need to extract and navigate to /path
-    if (location.search) {
-      const search = location.search.slice(1); // Remove the '?'
-      if (search.startsWith('/')) {
-        // Extract the path from the query string
-        const path = search.split('&')[0].replace(/~and~/g, '&');
+    if (location.search && location.search.startsWith('?/')) {
+      // Extract the path from the query string (format: ?/path&other=params)
+      const search = location.search.slice(2); // Remove the '?/'
+      // Split by & to separate path from query params, then decode ~and~ back to &
+      let path = search.split('&')[0].replace(/~and~/g, '&');
+      
+      // Ensure path starts with /
+      if (path && !path.startsWith('/')) {
+        path = '/' + path;
+      }
+      
+      // Only redirect if we have a valid path
+      if (path) {
+        // Preserve hash if present
+        const hash = location.hash || '';
         // Remove the query parameter and navigate to the actual path
-        window.history.replaceState(null, '', path + location.hash);
+        const newPath = path + hash;
+        window.history.replaceState(null, '', newPath);
         navigate(path, { replace: true });
       }
     }

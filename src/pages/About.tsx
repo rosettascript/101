@@ -123,7 +123,7 @@ export default function About() {
                 <Mail className="h-5 w-5" />
                 hello@rosettascript.dev
               </a>
-              <a href="#" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+              <a href="https://github.com/rosettascript" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
                 <Github className="h-5 w-5" />
                 github.com/rosettascript
               </a>

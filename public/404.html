@@ -8,17 +8,38 @@
       // GitHub Pages SPA redirect
       // This script redirects 404s to index.html for client-side routing
       // Static files (xml, txt, etc.) are served directly by GitHub Pages
-      var pathSegmentsToKeep = 0;
-      var l = window.location;
-      l.replace(
-        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
-        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
-        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-        l.hash
-      );
+      (function() {
+        var pathSegmentsToKeep = 0;
+        var l = window.location;
+        var pathname = l.pathname;
+        
+        // Don't redirect if this is a static file request
+        var staticExtensions = ['.xml', '.txt', '.html', '.json', '.ico', '.png', '.jpg', '.jpeg', '.svg', '.webmanifest', '.js', '.css', '.woff', '.woff2', '.ttf', '.eot'];
+        var isStaticFile = staticExtensions.some(function(ext) {
+          return pathname.toLowerCase().endsWith(ext);
+        });
+        
+        if (isStaticFile) {
+          return; // Let GitHub Pages serve the file directly
+        }
+        
+        // Build the redirect URL
+        var basePath = pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/');
+        if (basePath === '') basePath = '/';
+        if (!basePath.endsWith('/')) basePath += '/';
+        
+        var redirectPath = basePath + '?/' + 
+          pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+          (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+          l.hash;
+        
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') + redirectPath
+        );
+      })();
     </script>
   </head>
   <body></body>
 </html>
+
 
