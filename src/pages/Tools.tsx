@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint, Regex, Hash, KeyRound, Clock } from "lucide-react";
+import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint, Regex, Hash, KeyRound, Clock, Globe, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tools = [
@@ -84,6 +84,22 @@ const tools = [
     icon: Clock,
     path: "/tools/timestamp-converter",
     color: "text-[hsl(var(--syntax-orange))]",
+  },
+  {
+    id: "web-scraper",
+    title: "Web Scraper",
+    description: "Extract data from websites using CSS selectors. Simple, fast, and free web scraping tool.",
+    icon: Globe,
+    path: "/tools/web-scraper",
+    color: "text-[hsl(var(--syntax-cyan))]",
+  },
+  {
+    id: "json-extractor",
+    title: "JSON Data Extractor",
+    description: "Extract specific data from JSON. Get field values, use path syntax, or extract array values.",
+    icon: Search,
+    path: "/tools/json-extractor",
+    color: "text-[hsl(var(--syntax-green))]",
   },
 ];
 

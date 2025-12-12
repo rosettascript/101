@@ -14,6 +14,13 @@ export default defineConfig(({ mode }) => {
     server: {
       host: "::",
       port: 8000,
+      proxy: {
+        // Proxy for web scraping (optional - uncomment to use)
+        // '/api/scrape': {
+        //   target: 'http://localhost:3000',
+        //   changeOrigin: true,
+        // },
+      },
     },
     plugins: [
       react(),

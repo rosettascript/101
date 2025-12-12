@@ -17,6 +17,8 @@ import RegexTester from "./pages/tools/RegexTester";
 import HashGenerator from "./pages/tools/HashGenerator";
 import JwtDecoder from "./pages/tools/JwtDecoder";
 import TimestampConverter from "./pages/tools/TimestampConverter";
+import WebScraper from "./pages/tools/WebScraper";
+import JsonExtractor from "./pages/tools/JsonExtractor";
 import Downloads from "./pages/Downloads";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
@@ -81,6 +83,8 @@ const App = () => (
             <Route path="/tools/hash-generator" element={<HashGenerator />} />
             <Route path="/tools/jwt-decoder" element={<JwtDecoder />} />
             <Route path="/tools/timestamp-converter" element={<TimestampConverter />} />
+            <Route path="/tools/web-scraper" element={<WebScraper />} />
+            <Route path="/tools/json-extractor" element={<JsonExtractor />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:id" element={<BlogPost />} />
