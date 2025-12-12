@@ -1,7 +1,7 @@
 import { Layout } from "@/components/layout/Layout";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint, Regex, Hash, KeyRound, Clock, Globe, Search } from "lucide-react";
+import { Code2, FileCode, ArrowRight, Braces, Binary, Link as LinkIcon, Palette, Fingerprint, Regex, Hash, KeyRound, Clock, Globe, Search, QrCode, GitCompare, FileText, Image } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const tools = [
@@ -70,6 +70,14 @@ const tools = [
     color: "text-[hsl(var(--syntax-green))]",
   },
   {
+    id: "hash-decoder",
+    title: "Hash Decoder/Verifier",
+    description: "Verify if text matches a hash value. Check SHA-1, SHA-256, SHA-384, and SHA-512 hashes.",
+    icon: Search,
+    path: "/tools/hash-decoder",
+    color: "text-[hsl(var(--syntax-blue))]",
+  },
+  {
     id: "jwt-decoder",
     title: "JWT Decoder",
     description: "Decode and inspect JSON Web Tokens. View header, payload, signature, and expiration times.",
@@ -100,6 +108,38 @@ const tools = [
     icon: Search,
     path: "/tools/json-extractor",
     color: "text-[hsl(var(--syntax-green))]",
+  },
+  {
+    id: "qr-code-generator",
+    title: "QR Code Generator",
+    description: "Generate QR codes for WiFi, email, SMS, phone, contacts, events, files, and more. Customize size and download as PNG.",
+    icon: QrCode,
+    path: "/tools/qr-code-generator",
+    color: "text-[hsl(var(--syntax-cyan))]",
+  },
+  {
+    id: "text-diff",
+    title: "Text Diff Tool",
+    description: "Compare two texts and see differences. Compare by characters, words, or lines.",
+    icon: GitCompare,
+    path: "/tools/text-diff",
+    color: "text-[hsl(var(--syntax-purple))]",
+  },
+  {
+    id: "csv-to-json",
+    title: "CSV to JSON Converter",
+    description: "Convert CSV to JSON and JSON to CSV. Customizable delimiter and header options.",
+    icon: FileText,
+    path: "/tools/csv-to-json",
+    color: "text-[hsl(var(--syntax-green))]",
+  },
+  {
+    id: "image-tool",
+    title: "Image Tool",
+    description: "Compress, convert formats (PNG/JPEG/WebP), resize images, and generate favicons. All processing in your browser.",
+    icon: Image,
+    path: "/tools/image-tool",
+    color: "text-[hsl(var(--syntax-pink))]",
   },
 ];
 

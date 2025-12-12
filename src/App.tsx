@@ -15,10 +15,15 @@ import ColorConverter from "./pages/tools/ColorConverter";
 import UuidGenerator from "./pages/tools/UuidGenerator";
 import RegexTester from "./pages/tools/RegexTester";
 import HashGenerator from "./pages/tools/HashGenerator";
+import HashDecoder from "./pages/tools/HashDecoder";
 import JwtDecoder from "./pages/tools/JwtDecoder";
 import TimestampConverter from "./pages/tools/TimestampConverter";
 import WebScraper from "./pages/tools/WebScraper";
 import JsonExtractor from "./pages/tools/JsonExtractor";
+import QrCodeGenerator from "./pages/tools/QrCodeGenerator";
+import TextDiff from "./pages/tools/TextDiff";
+import CsvToJson from "./pages/tools/CsvToJson";
+import ImageTool from "./pages/tools/ImageTool";
 import Downloads from "./pages/Downloads";
 import Blogs from "./pages/Blogs";
 import BlogPost from "./pages/BlogPost";
@@ -81,10 +86,15 @@ const App = () => (
             <Route path="/tools/uuid-generator" element={<UuidGenerator />} />
             <Route path="/tools/regex-tester" element={<RegexTester />} />
             <Route path="/tools/hash-generator" element={<HashGenerator />} />
+            <Route path="/tools/hash-decoder" element={<HashDecoder />} />
             <Route path="/tools/jwt-decoder" element={<JwtDecoder />} />
             <Route path="/tools/timestamp-converter" element={<TimestampConverter />} />
             <Route path="/tools/web-scraper" element={<WebScraper />} />
             <Route path="/tools/json-extractor" element={<JsonExtractor />} />
+            <Route path="/tools/qr-code-generator" element={<QrCodeGenerator />} />
+            <Route path="/tools/text-diff" element={<TextDiff />} />
+            <Route path="/tools/csv-to-json" element={<CsvToJson />} />
+            <Route path="/tools/image-tool" element={<ImageTool />} />
             <Route path="/downloads" element={<Downloads />} />
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blogs/:id" element={<BlogPost />} />
