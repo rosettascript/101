@@ -332,25 +332,25 @@ export function QrCodeGeneratorTool() {
     <div className="space-y-6">
       {/* Type Selection */}
       <Tabs value={qrType} onValueChange={(v) => setQrType(v as QrCodeType)}>
-        <TabsList className="grid w-full grid-cols-3 lg:grid-cols-5">
-          <TabsTrigger value="text" className="flex items-center gap-1">
-            <FileText className="h-3 w-3" />
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 h-auto">
+          <TabsTrigger value="text" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm">
+            <FileText className="h-3 w-3 flex-shrink-0" />
             <span className="hidden sm:inline">Text</span>
           </TabsTrigger>
-          <TabsTrigger value="url" className="flex items-center gap-1">
-            <LinkIcon className="h-3 w-3" />
+          <TabsTrigger value="url" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm">
+            <LinkIcon className="h-3 w-3 flex-shrink-0" />
             <span className="hidden sm:inline">URL</span>
           </TabsTrigger>
-          <TabsTrigger value="wifi" className="flex items-center gap-1">
-            <Wifi className="h-3 w-3" />
+          <TabsTrigger value="wifi" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm">
+            <Wifi className="h-3 w-3 flex-shrink-0" />
             <span className="hidden sm:inline">WiFi</span>
           </TabsTrigger>
-          <TabsTrigger value="contact" className="flex items-center gap-1">
-            <User className="h-3 w-3" />
+          <TabsTrigger value="contact" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm">
+            <User className="h-3 w-3 flex-shrink-0" />
             <span className="hidden sm:inline">Contact</span>
           </TabsTrigger>
-          <TabsTrigger value="file" className="flex items-center gap-1">
-            <Image className="h-3 w-3" />
+          <TabsTrigger value="file" className="flex items-center justify-center gap-1 px-2 sm:px-3 py-1.5 text-xs sm:text-sm">
+            <Image className="h-3 w-3 flex-shrink-0" />
             <span className="hidden sm:inline">File</span>
           </TabsTrigger>
         </TabsList>
@@ -407,7 +407,7 @@ export function QrCodeGeneratorTool() {
                 placeholder="Leave empty for open networks"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="wifi-security">Security Type</Label>
                 <Select value={wifiSecurity} onValueChange={setWifiSecurity}>
@@ -449,7 +449,7 @@ export function QrCodeGeneratorTool() {
                 placeholder="John Doe"
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="contact-phone">Phone</Label>
                 <Input
@@ -496,7 +496,7 @@ export function QrCodeGeneratorTool() {
           <div className="space-y-4">
             <div className="space-y-2">
               <Label>Upload File (Image/Video/PDF)</Label>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 <Input
                   ref={fileInputRef}
                   type="file"
@@ -508,6 +508,7 @@ export function QrCodeGeneratorTool() {
                   type="button"
                   variant="outline"
                   onClick={() => fileInputRef.current?.click()}
+                  className="w-full sm:w-auto"
                 >
                   <Upload className="mr-2 h-4 w-4" />
                   Choose File
@@ -553,7 +554,7 @@ export function QrCodeGeneratorTool() {
       )}
 
       {/* Controls */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex flex-col">
           <span className="text-xs text-muted-foreground">
             {qrValue.length} characters
@@ -569,7 +570,7 @@ export function QrCodeGeneratorTool() {
             </span>
           )}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button
             onClick={handleCopy}
             variant="outline"

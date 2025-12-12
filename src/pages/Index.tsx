@@ -97,18 +97,18 @@ export default function Index() {
                 Code Smarter,{" "}
                 <span className="text-gradient">Build Faster</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-lg">
+              <p className="text-lg text-muted-foreground max-w-lg w-full">
                 RosettaScript provides a comprehensive suite of developer tools. 
                 From code formatters and converters to hash generators, image tools, and downloadable utilities—everything you need to boost your productivity.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Button asChild size="lg" className="glow-primary">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-4">
+                <Button asChild size="lg" className="glow-primary w-full sm:w-auto">
                   <Link to="/tools">
                     Try Online Tools
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg">
+                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
                   <Link to="/downloads">
                     <Download className="mr-2 h-4 w-4" />
                     Download Tools
@@ -118,25 +118,25 @@ export default function Index() {
             </div>
 
             {/* Code Preview */}
-            <div className="terminal-bg p-1">
+            <div className="terminal-bg p-1 w-full max-w-full overflow-hidden">
               <div className="flex items-center gap-2 px-4 py-2 border-b border-border">
                 <div className="w-3 h-3 rounded-full bg-destructive/80" />
                 <div className="w-3 h-3 rounded-full bg-[hsl(var(--syntax-yellow))]/80" />
                 <div className="w-3 h-3 rounded-full bg-primary/80" />
                 <span className="ml-2 text-xs text-muted-foreground font-mono">tools.ts</span>
               </div>
-              <pre className="p-4 overflow-auto">
-                <code className="text-sm font-mono">
+              <pre className="p-4 overflow-auto max-w-full">
+                <code className="text-sm font-mono block min-w-0">
                   {codeSnippet.split("\n").map((line, i) => (
-                    <div key={i} className="flex">
-                      <span className="w-8 text-muted-foreground select-none">{i + 1}</span>
-                      <span className={
+                    <div key={i} className="flex min-w-0">
+                      <span className="w-8 flex-shrink-0 text-muted-foreground select-none">{i + 1}</span>
+                      <span className={`flex-1 min-w-0 break-words ${
                         line.startsWith("//") ? "text-muted-foreground" :
                         line.includes("const") ? "text-secondary" :
                         line.includes(":") ? "text-[hsl(var(--syntax-orange))]" :
                         line.includes("export") ? "text-accent" :
                         "text-foreground"
-                      }>
+                      }`}>
                         {line}
                       </span>
                     </div>
@@ -158,7 +158,7 @@ export default function Index() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {features.map((feature) => (
               <Link key={feature.title} to={feature.link}>
                 <Card className="h-full bg-card/50 border-border hover:border-primary/50 transition-all hover:shadow-lg hover:shadow-primary/5 group">
@@ -182,7 +182,7 @@ export default function Index() {
       {/* Highlights */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {highlights.map((highlight) => (
               <Card 
                 key={highlight.title} 
@@ -206,14 +206,14 @@ export default function Index() {
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
             Explore our 20+ online tools, download utilities, read our blog, or check out school project templates.
           </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button asChild size="lg">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+            <Button asChild size="lg" className="w-full sm:w-auto">
               <Link to="/tools">
                 Browse All Tools
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="lg" className="w-full sm:w-auto">
               <Link to="/blogs">
                 Read Blog
                 <ArrowRight className="ml-2 h-4 w-4" />

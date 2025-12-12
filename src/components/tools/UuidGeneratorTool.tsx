@@ -74,7 +74,7 @@ export function UuidGeneratorTool() {
   return (
     <div className="space-y-6">
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4">
         <div className="flex items-center gap-2">
           <Switch
             id="hyphens"
@@ -83,7 +83,7 @@ export function UuidGeneratorTool() {
           />
           <Label htmlFor="hyphens" className="text-sm">Include hyphens</Label>
         </div>
-        <div className="flex gap-2 ml-auto">
+        <div className="flex flex-wrap gap-2 sm:ml-auto">
           <Button onClick={() => handleGenerate(1)} size="sm">
             <RefreshCw className="mr-2 h-4 w-4" />
             Generate 1

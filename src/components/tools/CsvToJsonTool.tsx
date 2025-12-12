@@ -312,14 +312,14 @@ export function CsvToJsonTool() {
   return (
     <div className="space-y-6">
       {/* Direction Toggle */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <Tabs value={direction} onValueChange={(v) => setDirection(v as typeof direction)}>
           <TabsList>
             <TabsTrigger value="csv-to-json">CSV → JSON</TabsTrigger>
             <TabsTrigger value="json-to-csv">JSON → CSV</TabsTrigger>
           </TabsList>
         </Tabs>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button
             onClick={handleCopy}
             variant="outline"
@@ -355,7 +355,7 @@ export function CsvToJsonTool() {
       </div>
 
       {/* Options */}
-      <div className="flex flex-wrap items-center gap-4 p-4 bg-background/50 rounded-lg border border-border">
+      <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 p-4 bg-background/50 rounded-lg border border-border">
         <div className="flex items-center gap-2">
           <Label htmlFor="delimiter" className="text-sm">Delimiter:</Label>
           <Input
@@ -374,16 +374,16 @@ export function CsvToJsonTool() {
           />
           <Label htmlFor="header" className="text-sm">Has Header Row</Label>
         </div>
-        <Button onClick={handleConvert} className="ml-auto">
+        <Button onClick={handleConvert} className="w-full sm:w-auto sm:ml-auto">
           <ArrowUpDown className="mr-2 h-4 w-4" />
           Convert
         </Button>
       </div>
 
       {/* Input/Output */}
-      <div className="grid lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-2">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <label className="text-sm font-medium text-muted-foreground">
               {direction === "csv-to-json" ? "CSV Input" : "JSON Input"}
             </label>
@@ -392,6 +392,7 @@ export function CsvToJsonTool() {
               variant="outline"
               size="sm"
               onClick={() => fileInputRef.current?.click()}
+              className="w-full sm:w-auto"
             >
               <Upload className="mr-2 h-4 w-4" />
               Choose File

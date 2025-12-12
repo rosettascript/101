@@ -69,14 +69,14 @@ export function TextDiffTool() {
     return diff.map((part, index) => {
       if (part.added) {
         return (
-          <span key={index} className="bg-green-500/30 text-green-300 px-1 rounded">
+          <span key={index} className="bg-green-600/20 dark:bg-green-500/30 text-green-700 dark:text-green-300 px-1 rounded">
             {part.value}
           </span>
         );
       }
       if (part.removed) {
         return (
-          <span key={index} className="bg-red-500/30 text-red-300 px-1 rounded line-through">
+          <span key={index} className="bg-red-600/20 dark:bg-red-500/30 text-red-700 dark:text-red-300 px-1 rounded line-through">
             {part.value}
           </span>
         );
@@ -88,32 +88,34 @@ export function TextDiffTool() {
   return (
     <div className="space-y-6">
       {/* Mode Selection */}
-      <div className="flex items-center gap-4">
-        <span className="text-sm text-muted-foreground">Compare by:</span>
-        <div className="flex gap-2">
-          <Button
-            variant={diffMode === "chars" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setDiffMode("chars")}
-          >
-            Characters
-          </Button>
-          <Button
-            variant={diffMode === "words" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setDiffMode("words")}
-          >
-            Words
-          </Button>
-          <Button
-            variant={diffMode === "lines" ? "default" : "outline"}
-            size="sm"
-            onClick={() => setDiffMode("lines")}
-          >
-            Lines
-          </Button>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+          <span className="text-sm text-muted-foreground whitespace-nowrap">Compare by:</span>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant={diffMode === "chars" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setDiffMode("chars")}
+            >
+              Characters
+            </Button>
+            <Button
+              variant={diffMode === "words" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setDiffMode("words")}
+            >
+              Words
+            </Button>
+            <Button
+              variant={diffMode === "lines" ? "default" : "outline"}
+              size="sm"
+              onClick={() => setDiffMode("lines")}
+            >
+              Lines
+            </Button>
+          </div>
         </div>
-        <div className="flex gap-2 ml-auto">
+        <div className="flex flex-wrap gap-2 sm:ml-auto">
           <Button
             onClick={handleCopy}
             variant="outline"
@@ -140,7 +142,7 @@ export function TextDiffTool() {
       </div>
 
       {/* Input Areas */}
-      <div className="grid lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-medium text-muted-foreground">Text 1 (Original)</label>
           <Textarea
@@ -163,11 +165,11 @@ export function TextDiffTool() {
 
       {/* Diff Output */}
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <label className="text-sm font-medium text-muted-foreground">Difference</label>
-          <div className="flex items-center gap-2 text-xs text-muted-foreground">
-            <span className="bg-green-500/30 text-green-300 px-2 py-1 rounded">Added</span>
-            <span className="bg-red-500/30 text-red-300 px-2 py-1 rounded">Removed</span>
+          <div className="flex items-center gap-2 text-xs">
+            <span className="bg-green-600/20 dark:bg-green-500/30 text-green-700 dark:text-green-300 px-2 py-1 rounded font-medium">Added</span>
+            <span className="bg-red-600/20 dark:bg-red-500/30 text-red-700 dark:text-red-300 px-2 py-1 rounded font-medium">Removed</span>
           </div>
         </div>
         <div className="min-h-[300px] p-4 bg-background/50 border border-border rounded-md overflow-auto">
